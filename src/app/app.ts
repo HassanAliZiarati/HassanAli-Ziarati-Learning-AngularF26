@@ -9,4 +9,9 @@ import { RouterOutlet } from '@angular/router';
 })
 export class App {
   protected readonly title = signal('HassanAli-Ziarati-Learning-AngularF26');
+
+  fullName: String = "Hassan Ali Ziarati";
+  age: Number = 25;
 }
+
+
