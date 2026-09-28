@@ -1,18 +1,1 @@
-<h1>Motorcycle List</h1>
-
-@for (motorcycle of motorcycleList; track motorcycle.id) {
-    <h2>{{ motorcycle.brand }} {{ motorcycle.model }}</h2>
-    <p>ID: {{motorcycle.id}}</p>
-    <p>Engine: {{ motorcycle.engineCC }} cc</p>
-    <p>Category: {{ motorcycle.category }}</p>
-
-  @if (motorcycle.hasABS) {
-    <p>Has ABS</p>
-  } @else {
-    <p>No ABS</p>
-  }
-}
-
-@empty {
-  <p>No Motorcycle to show!</p>
-}
+<app-motorcycle-list></app-motorcycle-list>
