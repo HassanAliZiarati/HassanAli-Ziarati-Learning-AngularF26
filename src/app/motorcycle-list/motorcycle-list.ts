@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Motorcycle } from '../shared/models/motorcycle';
-import {MotorcycleListItem} from '../motorcycle-list-item/motorcycle-list-item';
+import {MotorcycleListItem, MotorcycleEvent} from '../motorcycle-list-item/motorcycle-list-item';
 
 @Component({
   imports: [MotorcycleListItem],
@@ -17,4 +17,8 @@ export class MotorcycleList {
     { id: 5, brand: 'Kawasaki', model: 'Z900RS SE', engineCC: 948, hasABS: true, category: 'naked', },
     { id: 6, brand: 'Suzuki', model: 'Boulevard M109R', engineCC: 1783, hasABS: false, category: 'cruiser', },
   ];
+
+  onMotorcycleClicked(event: MotorcycleEvent) {
+    console.log(event);
+  }
 }
