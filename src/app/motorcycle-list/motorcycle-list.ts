@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { Motorcycle } from '../shared/models/motorcycle';
+import {MotorcycleListItem} from '../motorcycle-list-item/motorcycle-list-item';
 
 @Component({
-  imports: [],
+  imports: [MotorcycleListItem],
   selector: 'app-motorcycle-list',
   styleUrl: './motorcycle-list.css',
   templateUrl: './motorcycle-list.html',

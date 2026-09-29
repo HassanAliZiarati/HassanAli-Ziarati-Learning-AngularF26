@@ -1,1 +1,6 @@
-<p>motorcycle-list works!</p>
+<h1>Motorcycle List</h1>
+@for (motorcycle of motorcycleList; track motorcycle.id) {
+  <app-motorcycle-list-item [motorcycle]="motorcycle"></app-motorcycle-list-item>
+} @empty {
+  <p>Nothing to show!!! GO BACK</p>
+}
