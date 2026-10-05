@@ -1,6 +1,13 @@
 <h1>Motorcycle List</h1>
 @for (motorcycle of motorcycleList; track motorcycle.id) {
-  <app-motorcycle-list-item [motorcycle]="motorcycle" (motorcycleClicked)="onMotorcycleClicked($event)"></app-motorcycle-list-item>
+  <app-motorcycle-list-item
+    [motorcycle]="motorcycle"
+
+    [class.even] = "$even"
+    [class.odd]="$odd"
+    (motorcycleClicked)="onMotorcycleClicked($event)">
+
+  </app-motorcycle-list-item>
 } @empty {
   <p>Nothing to show!!! GO BACK</p>
 }

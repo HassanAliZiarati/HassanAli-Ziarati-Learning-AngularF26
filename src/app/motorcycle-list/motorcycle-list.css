@@ -1,3 +1,14 @@
 h1 {
   text-align: center;
 }
+app-motorcycle-list-item {
+  display: block;
+}
+.even {
+  background-color: lightsalmon;
+}
+.odd {
+  background-color: lightcyan;
+}
+
+

@@ -10,7 +10,7 @@ import  {MotorcycleList} from './motorcycle-list/motorcycle-list';
   standalone: true,
 })
 export class App {
-  // Arrays Moved to motorcycle.ts
+  // Arrays moved to motorcycle.ts
 }
 
 
