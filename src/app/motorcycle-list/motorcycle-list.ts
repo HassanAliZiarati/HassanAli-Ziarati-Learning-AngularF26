@@ -20,8 +20,12 @@ export class MotorcycleList {
 
   sportMotorcycle = this.motorcycleService.sportMotorcycles;
 
+  sportMotorcycleCount = this.motorcycleService.sportMotorcycleCount;
+
   // Console motorcycle click event
   onMotorcycleClicked(event: MotorcycleEvent) {
     console.log(event);
+    // Remove the motorcycle
+    this.motorcycleService.removeMotorcycle(event.id);
   }
 }

@@ -20,15 +20,28 @@ export class MotorcycleService {
     this.motorcycles.update(list => [...list, newMotorcycle]);
   }
 
+  // Filter the list of Sport motorcycle
   readonly sportMotorcycles = computed(() =>
     this.motorcycles().filter(motorcycle => motorcycle.category === "sport")
   );
+
+  // Show the number of filtered list
+  readonly sportMotorcycleCount = computed(() =>
+    this.sportMotorcycles().length
+  )
 
   // count the motorcycle numbers
   constructor() {
     effect(() => {
       console.log('Motorcycle count:', this.motorcycles().length);
     });
+  }
+
+  // Delete motorcycle by click method
+  removeMotorcycle(id: number): void {
+    this.motorcycles.update( list =>
+    list.filter(motorcycle => motorcycle.id !== id)
+    );
   }
 
 }
