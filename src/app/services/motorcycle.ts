@@ -1,5 +1,6 @@
-import { Service, signal } from '@angular/core';
+import { Service, signal, computed, effect } from '@angular/core';
 import {Motorcycle} from '../shared/models/motorcycle';
+import { readonly } from '@angular/forms/signals';
 
 
 @Service()
@@ -13,4 +14,21 @@ export class MotorcycleService {
   { id: 6, brand: 'Suzuki', model: 'Boulevard M109R', engineCC: 1783, hasABS: false, category: 'cruiser', image: 'images/Suzuki.jpg' },
   ]);
   readonly motorcycleList = this.motorcycles.asReadonly();
+
+  // Creating add method to the array
+  addMotorcycle(newMotorcycle: Motorcycle) {
+    this.motorcycles.update(list => [...list, newMotorcycle]);
+  }
+
+  readonly sportMotorcycles = computed(() =>
+    this.motorcycles().filter(motorcycle => motorcycle.category === "sport")
+  );
+
+  // count the motorcycle numbers
+  constructor() {
+    effect(() => {
+      console.log('Motorcycle count:', this.motorcycles().length);
+    });
+  }
+
 }
