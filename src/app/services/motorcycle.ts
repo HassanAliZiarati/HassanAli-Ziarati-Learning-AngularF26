@@ -1,5 +1,6 @@
-import { Service, signal, computed, effect } from '@angular/core';
+import { Service, signal, computed, effect, inject } from '@angular/core';
 import {Motorcycle} from '../shared/models/motorcycle';
+import { MOTORCYCLE_CONFIG } from '../shared/config/motorcycle-config';
 
 
 @Service()
@@ -12,6 +13,9 @@ export class MotorcycleService {
   { id: 5, brand: 'Kawasaki', model: 'Z900RS SE', engineCC: 948, hasABS: true, category: 'naked', image: 'images/Z900RS.jpg' },
   { id: 6, brand: 'Suzuki', model: 'Boulevard M109R', engineCC: 1783, hasABS: false, category: 'cruiser', image: 'images/Suzuki.jpg' },
   ]);
+
+  private config = inject(MOTORCYCLE_CONFIG);
+
   readonly motorcycleList = this.motorcycles.asReadonly();
 
   // Creating add method to the array
@@ -21,7 +25,8 @@ export class MotorcycleService {
 
   // Filter the list of Sport motorcycle
   readonly sportMotorcycles = computed(() =>
-    this.motorcycles().filter(motorcycle => motorcycle.category === "sport")
+
+    this.motorcycles().filter(motorcycle => motorcycle.category === this.config.defaultCategory)
   );
 
   // Show the number of filtered list
