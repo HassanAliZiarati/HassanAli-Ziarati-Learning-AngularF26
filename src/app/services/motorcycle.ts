@@ -1,9 +1,9 @@
-import { Service, signal, computed, effect, inject } from '@angular/core';
+import { Injectable, signal, computed, effect, inject } from '@angular/core';
 import {Motorcycle} from '../shared/models/motorcycle';
 import { MOTORCYCLE_CONFIG } from '../shared/config/motorcycle-config';
 
 
-@Service()
+@Injectable()
 export class MotorcycleService {
   private motorcycles = signal<Motorcycle[]>([
   { id: 1, brand: 'Honda', model: 'CBR650R', engineCC: 649, hasABS: true, category: 'sport', image: 'images/CBR650.jpg'},
