@@ -1,5 +1,4 @@
 import { Component, inject } from '@angular/core';
-import { Motorcycle } from '../shared/models/motorcycle';
 import { MotorcycleListItem } from '../motorcycle-list-item/motorcycle-list-item';
 import { MotorcycleEvent } from '../shared/models/motorcycle-event';
 import { MotorcycleService} from '../services/motorcycle';
@@ -11,7 +10,6 @@ import { MotorcycleService} from '../services/motorcycle';
   templateUrl: './motorcycle-list.html',
 })
 
-// Define array for our content
 export class MotorcycleList {
   // Replaced with Motorcycle array item
   private motorcycleService = inject(MotorcycleService);
