@@ -1,4 +1,4 @@
-<h1>Add Motorcycle</h1>
+<h2>{{ isEditMode() ? 'Edit Motorcycle' : 'Add Motorcycle' }}</h2>
 
 <form [formGroup]="motorcycleForm" (ngSubmit)="onSubmit()">
   <label>
@@ -50,5 +50,6 @@
   </label>
 
   <button type="submit" [disabled]="motorcycleForm.invalid">
-    Add Motorcycle</button>
+    {{ isEditMode() ? 'Save Changes' : 'Add Motorcycle' }}
+  </button>
 </form>

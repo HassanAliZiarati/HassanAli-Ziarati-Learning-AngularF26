@@ -6,12 +6,60 @@ import { MOTORCYCLE_CONFIG } from '../shared/config/motorcycle-config';
 @Injectable()
 export class MotorcycleService {
   private motorcycles = signal<Motorcycle[]>([
-  { id: 1, brand: 'Honda', model: 'CBR650R', engineCC: 649, hasABS: true, category: 'sport', image: 'images/CBR650.jpg'},
-  { id: 2, brand: 'Yamaha', model: 'MT-10', engineCC: 998, hasABS: true, category: 'naked', image: 'images/MT-10.jpg'},
-  { id: 3, brand: 'Kawasaki', model: 'H2R', engineCC: 998, hasABS: true, category: 'sport', image: 'images/H2R.jpg' },
-  { id: 4, brand: 'BMW', model: 'S 1000 RR', engineCC: 1000, hasABS: true, category: 'sport', image: 'images/BMW S1000RR.jpg' },
-  { id: 5, brand: 'Kawasaki', model: 'Z900RS SE', engineCC: 948, hasABS: true, category: 'naked', image: 'images/Z900RS.jpg' },
-  { id: 6, brand: 'Suzuki', model: 'Boulevard M109R', engineCC: 1783, hasABS: false, category: 'cruiser', image: 'images/Suzuki.jpg' },
+    {
+      id: 1,
+      brand: 'Honda',
+      model: 'CBR650R',
+      engineCC: 649,
+      hasABS: true,
+      category: 'sport',
+      image: 'images/CBR650.jpg',
+    },
+    {
+      id: 2,
+      brand: 'Yamaha',
+      model: 'MT-10',
+      engineCC: 998,
+      hasABS: true,
+      category: 'naked',
+      image: 'images/MT-10.jpg',
+    },
+    {
+      id: 3,
+      brand: 'Kawasaki',
+      model: 'H2R',
+      engineCC: 998,
+      hasABS: true,
+      category: 'sport',
+      image: 'images/H2R.jpg',
+    },
+    {
+      id: 4,
+      brand: 'BMW',
+      model: 'S 1000 RR',
+      engineCC: 1000,
+      hasABS: true,
+      category: 'sport',
+      image: 'images/BMW S1000RR.jpg',
+    },
+    {
+      id: 5,
+      brand: 'Kawasaki',
+      model: 'Z900RS SE',
+      engineCC: 948,
+      hasABS: true,
+      category: 'naked',
+      image: 'images/Z900RS.jpg',
+    },
+    {
+      id: 6,
+      brand: 'Suzuki',
+      model: 'Boulevard M109R',
+      engineCC: 1783,
+      hasABS: false,
+      category: 'cruiser',
+      image: 'images/Suzuki.jpg',
+    },
   ]);
 
   private config = inject(MOTORCYCLE_CONFIG);
@@ -20,19 +68,16 @@ export class MotorcycleService {
 
   // Creating add method to the array
   addMotorcycle(newMotorcycle: Motorcycle) {
-    this.motorcycles.update(list => [...list, newMotorcycle]);
+    this.motorcycles.update((list) => [...list, newMotorcycle]);
   }
 
   // Filter the list of Sport motorcycle
   readonly sportMotorcycles = computed(() =>
-
-    this.motorcycles().filter(motorcycle => motorcycle.category === this.config.defaultCategory)
+    this.motorcycles().filter((motorcycle) => motorcycle.category === this.config.defaultCategory),
   );
 
   // Show the number of filtered list
-  readonly sportMotorcycleCount = computed(() =>
-    this.sportMotorcycles().length
-  )
+  readonly sportMotorcycleCount = computed(() => this.sportMotorcycles().length);
 
   // count the motorcycle numbers
   constructor() {
@@ -43,9 +88,23 @@ export class MotorcycleService {
 
   // Delete motorcycle by click method
   removeMotorcycle(id: number): void {
-    this.motorcycles.update( list =>
-    list.filter(motorcycle => motorcycle.id !== id)
+    this.motorcycles.update((list) => list.filter((motorcycle) => motorcycle.id !== id));
+  }
+
+  // Find a motorcycle by its ID
+  getMotorcycle(id: number): Motorcycle | undefined {
+    return this.motorcycles().find((motorcycle) => motorcycle.id === id);
+  }
+
+  // Replace the motorcycle with the matching ID
+  updateMotorcycle(updated: Motorcycle): void {
+    this.motorcycles.update((list) =>
+      list.map((motorcycle) => (motorcycle.id === updated.id ? updated : motorcycle)),
     );
   }
 
+  // Create an ID above the highest current ID
+  nextId(): number {
+    return Math.max(0, ...this.motorcycles().map((motorcycle) => motorcycle.id)) + 1;
+  }
 }
