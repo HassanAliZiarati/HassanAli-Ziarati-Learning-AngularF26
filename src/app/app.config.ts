@@ -1,14 +1,15 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { routes } from './app.routes';
 import {MOTORCYCLE_CONFIG} from './shared/config/motorcycle-config';
 import {MotorcycleService} from './services/motorcycle';
 import {MockMotorcycleService} from './services/mock-motorcycle';
 
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideRouter(routes),
+    provideRouter(routes, withComponentInputBinding()),
 
     {
       provide: MOTORCYCLE_CONFIG,

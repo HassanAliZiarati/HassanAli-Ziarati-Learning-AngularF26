@@ -1,9 +1,10 @@
 import { Component, input, output } from '@angular/core';
 import {Motorcycle} from '../shared/models/motorcycle';
 import { MotorcycleEvent } from '../shared/models/motorcycle-event';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  imports: [],
+  imports: [RouterLink],
   selector: 'app-motorcycle-list-item',
   styleUrl: './motorcycle-list-item.css',
   templateUrl: './motorcycle-list-item.html',

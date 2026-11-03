@@ -1,0 +1,19 @@
+<h1>Motorcycle Details</h1>
+
+@if (motorcycle(); as item) {
+  <h2>{{ item.brand }} {{ item.model }}</h2>
+  <img [src]="item.image" [alt]="item.brand + ' ' + item.model">
+  <p>ID: {{ item.id }}</p>
+  <p>Engine: {{ item.engineCC }} cc</p>
+  <p>Category: {{ item.category }}</p>
+
+  @if (item.hasABS === true) {
+    <p>ABS: YES</p>
+  } @else if (item.hasABS === false) {
+    <p>ABS: NO</p>
+  } @else {
+    <p>ABS Information Not Defined!</p>
+  }
+} @else {
+  <p>Motorcycle not found!</p>
+}
