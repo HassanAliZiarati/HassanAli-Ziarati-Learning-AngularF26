@@ -1,10 +1,11 @@
 import { Component, signal } from '@angular/core';
 import { Motorcycle} from './shared/models/motorcycle';
 import  {MotorcycleList} from './motorcycle-list/motorcycle-list';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet, RouterLink } from '@angular/router';
+
 
 @Component({
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, RouterLink],
   selector: 'app-root',
   styleUrl: './app.scss',
   templateUrl: './app.html',

@@ -1,0 +1,54 @@
+<h1>Add Motorcycle</h1>
+
+<form [formGroup]="motorcycleForm" (ngSubmit)="onSubmit()">
+  <label>
+    Brand
+    <input type="text" formControlName="brand">
+  </label>
+  @if (motorcycleForm.controls.brand.touched) {
+    @if (motorcycleForm.controls.brand.hasError('required')) {
+      <p>Brand is required.</p>
+    }
+
+    @if (motorcycleForm.controls.brand.hasError('minlength')) {
+      <p>Brand must be at least 2 characters.</p>
+    }
+  }
+
+  <label>
+    Model
+    <input type="text" formControlName="model">
+  </label>
+  @if (motorcycleForm.controls.model.touched) {
+    @if (motorcycleForm.controls.model.hasError('required')) {
+      <p>Model is required.</p>
+    }
+  }
+
+  <label>
+    Engine CC
+    <input type="number" formControlName="engineCC">
+  </label>
+
+  <label>
+    Category
+    <select formControlName="category">
+      <option value="sport">Sport</option>
+      <option value="naked">Naked</option>
+      <option value="cruiser">Cruiser</option>
+    </select>
+  </label>
+
+  <label>
+    <input type="checkbox" formControlName="hasABS">
+    Has ABS
+  </label>
+
+  <label>
+    Image path
+    <input type="text" formControlName="image">
+  </label>
+
+  <button type="submit" [disabled]="motorcycleForm.invalid">
+    Add Motorcycle</button>
+</form>
