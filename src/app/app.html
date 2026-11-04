@@ -2,6 +2,14 @@
   <a routerLink="/">Motorcycle List</a>
   |
   <a routerLink="/motorcycles/add">Add Motorcycle</a>
+  <!-- Change the editing lock -->
+  <button
+    type="button"
+    (click)="editGuardService.changeGuard()">
+    {{ editGuardService.guardEnabled()
+    ? 'Editing locked — Unlock'
+    : 'Editing unlocked — Lock' }}
+  </button>
 </nav>
 
 <router-outlet></router-outlet>

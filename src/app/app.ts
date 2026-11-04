@@ -1,8 +1,8 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, inject } from '@angular/core';
 import { Motorcycle} from './shared/models/motorcycle';
 import  {MotorcycleList} from './motorcycle-list/motorcycle-list';
 import { Router, RouterOutlet, RouterLink } from '@angular/router';
-
+import { EditGuardService } from './services/edit-guard';
 
 @Component({
   imports: [RouterOutlet, RouterLink],
@@ -12,7 +12,8 @@ import { Router, RouterOutlet, RouterLink } from '@angular/router';
   standalone: true,
 })
 export class App {
-  // Arrays moved to motorcycle.ts
+  // Get the guard service
+  protected editGuardService = inject(EditGuardService);
 }
 
 
