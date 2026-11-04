@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
-import { EditGuard } from './edit-guard';
+import { EditGuardService } from './edit-guard';
 
 describe('EditGuard', () => {
-  let service: EditGuard;
+  let service: EditGuardService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(EditGuard);
+    service = TestBed.inject(EditGuardService);
   });
 
   it('should be created', () => {

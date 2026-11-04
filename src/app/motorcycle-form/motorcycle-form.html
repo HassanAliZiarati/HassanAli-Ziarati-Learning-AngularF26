@@ -9,6 +9,10 @@
     @if (motorcycleForm.controls.brand.hasError('required')) {
       <p>Brand is required.</p>
     }
+  <!--If there is a space: -->
+    @if (motorcycleForm.controls.brand.hasError('spacesOnly')) {
+      <p>Brand cannot contain only spaces.</p>
+    }
 
     @if (motorcycleForm.controls.brand.hasError('minlength')) {
       <p>Brand must be at least 2 characters.</p>
@@ -48,6 +52,14 @@
     Image path
     <input type="text" formControlName="image">
   </label>
+
+  @if (
+    motorcycleForm.controls.brand.touched &&
+    motorcycleForm.controls.model.touched &&
+    motorcycleForm.hasError('sameBrandAndModel')
+    ) {
+    <p>Brand and model must be different.</p>
+  }
 
   <button type="submit" [disabled]="motorcycleForm.invalid">
     {{ isEditMode() ? 'Save Changes' : 'Add Motorcycle' }}
