@@ -14,7 +14,8 @@ export const appConfig: ApplicationConfig = {
     {
       provide: MOTORCYCLE_CONFIG,
       useValue: {
-        apiBaseUrl: 'https://placeholder.example.com/api',
+        // API base URL
+        apiBaseUrl: 'https://dummyjson.com',
         defaultCategory: 'sport',
       },
     },
