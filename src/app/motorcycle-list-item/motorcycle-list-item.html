@@ -1,34 +1,15 @@
 <div class="motorcycle-item-style" (click)="openMotorcycle()">
 
-  <h2>{{ motorcycle().brand }} {{ motorcycle().model}}</h2>
+  <h2>{{ motorcycle().title }}</h2>
 
-  <img [src]="motorcycle().image">
+  <img
+    [src]="motorcycle().thumbnail"
+    [alt]= "motorcycle().title" >
 
-  <p>ID: {{motorcycle().id}}</p>
-  <p>Engine: {{motorcycle().engineCC}} cc</p>
-
-  @switch (motorcycle().category) {
-    @case ('sport') {
-      <p>SPORT BIKE</p>
-    }
-    @case ('naked') {
-      <p>NAKED BIKE</p>
-    }
-    @case ('cruiser') {
-      <p>CRUISER BIKE</p>
-    }
-    @default {
-      <p>Other Type of Bike!</p>
-    }
-  }
-  @if (motorcycle().hasABS === true) {
-    <p>ABS: YES</p>
-  } @else if (motorcycle().hasABS === false) {
-    <p>ABS: NO</p>
-  } @else {
-
-    <p>ABS Information Not Defined!</p>
-  }
+  <p>ID: {{ motorcycle().id }}</p>
+  <p>Brand: {{ motorcycle().brand }}</p>
+  <p>Price: {{ motorcycle().price }}</p>
+  <p>Category: {{ motorcycle().category }}</p>
 
   <a
     [routerLink]="['/motorcycles', motorcycle().id]"
@@ -36,7 +17,7 @@
     View Details
   </a>
 
-  <!--Open the edit form and stop delete the card by clicking-->
+  <!--Open the edit form -->
   <button type="button"
           [routerLink]="['/motorcycles/edit',
           motorcycle().id]"

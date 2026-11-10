@@ -9,16 +9,14 @@ import { MotorcycleService} from '../services/motorcycle';
   styleUrl: './motorcycle-list.css',
   templateUrl: './motorcycle-list.html',
 })
-
 export class MotorcycleList {
   // Replaced with Motorcycle array item
   private motorcycleService = inject(MotorcycleService);
 
   motorcycleList = this.motorcycleService.motorcycleList;
 
-  sportMotorcycle = this.motorcycleService.sportMotorcycles;
-
-  sportMotorcycleCount = this.motorcycleService.sportMotorcycleCount;
+  filteredMotorcycles = this.motorcycleService.filteredMotorcycles;
+  filteredMotorcycleCount = this.motorcycleService.filteredMotorcycleCount;
 
   // Console motorcycle click event
   onMotorcycleClicked(event: MotorcycleEvent) {

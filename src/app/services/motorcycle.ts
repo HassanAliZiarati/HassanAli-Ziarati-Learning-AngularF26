@@ -5,62 +5,7 @@ import { MOTORCYCLE_CONFIG } from '../shared/config/motorcycle-config';
 
 @Injectable()
 export class MotorcycleService {
-  private motorcycles = signal<Motorcycle[]>([
-    {
-      id: 1,
-      brand: 'Honda',
-      model: 'CBR650R',
-      engineCC: 649,
-      hasABS: true,
-      category: 'sport',
-      image: 'images/CBR650.jpg',
-    },
-    {
-      id: 2,
-      brand: 'Yamaha',
-      model: 'MT-10',
-      engineCC: 998,
-      hasABS: true,
-      category: 'naked',
-      image: 'images/MT-10.jpg',
-    },
-    {
-      id: 3,
-      brand: 'Kawasaki',
-      model: 'H2R',
-      engineCC: 998,
-      hasABS: true,
-      category: 'sport',
-      image: 'images/H2R.jpg',
-    },
-    {
-      id: 4,
-      brand: 'BMW',
-      model: 'S 1000 RR',
-      engineCC: 1000,
-      hasABS: true,
-      category: 'sport',
-      image: 'images/BMW S1000RR.jpg',
-    },
-    {
-      id: 5,
-      brand: 'Kawasaki',
-      model: 'Z900RS SE',
-      engineCC: 948,
-      hasABS: true,
-      category: 'naked',
-      image: 'images/Z900RS.jpg',
-    },
-    {
-      id: 6,
-      brand: 'Suzuki',
-      model: 'Boulevard M109R',
-      engineCC: 1783,
-      hasABS: false,
-      category: 'cruiser',
-      image: 'images/Suzuki.jpg',
-    },
-  ]);
+  private motorcycles = signal<Motorcycle[]>([]);
 
   private config = inject(MOTORCYCLE_CONFIG);
 
@@ -71,13 +16,13 @@ export class MotorcycleService {
     this.motorcycles.update((list) => [...list, newMotorcycle]);
   }
 
-  // Filter the list of Sport motorcycle
-  readonly sportMotorcycles = computed(() =>
-    this.motorcycles().filter((motorcycle) => motorcycle.category === this.config.defaultCategory),
+  // Filter motorcycle by category
+  readonly filteredMotorcycles = computed(() =>
+    this.motorcycles().filter(motorcycle => motorcycle.category === this.config.defaultCategory),
   );
 
   // Show the number of filtered list
-  readonly sportMotorcycleCount = computed(() => this.sportMotorcycles().length);
+  readonly filteredMotorcycleCount = computed(() => this.filteredMotorcycles().length);
 
   // count the motorcycle numbers
   constructor() {

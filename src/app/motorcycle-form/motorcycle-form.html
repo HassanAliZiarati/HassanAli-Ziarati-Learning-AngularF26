@@ -20,45 +20,38 @@
   }
 
   <label>
-    Model
-    <input type="text" formControlName="model">
+    Title
+    <input type="text" formControlName="title">
   </label>
-  @if (motorcycleForm.controls.model.touched) {
-    @if (motorcycleForm.controls.model.hasError('required')) {
-      <p>Model is required.</p>
+  @if (motorcycleForm.controls.title.touched) {
+    @if (motorcycleForm.controls.title.hasError('required')) {
+      <p>Title is required.</p>
     }
   }
 
   <label>
-    Engine CC
-    <input type="number" formControlName="engineCC">
+    Price
+    <input type="number" formControlName="price">
   </label>
 
   <label>
     Category
     <select formControlName="category">
-      <option value="sport">Sport</option>
-      <option value="naked">Naked</option>
-      <option value="cruiser">Cruiser</option>
+    <option value="motorcycle">Motorcycle</option>
     </select>
   </label>
 
   <label>
-    <input type="checkbox" formControlName="hasABS">
-    Has ABS
-  </label>
-
-  <label>
-    Image path
-    <input type="text" formControlName="image">
+    Image URL
+    <input type="text" formControlName="thumbnail">
   </label>
 
   @if (
     motorcycleForm.controls.brand.touched &&
-    motorcycleForm.controls.model.touched &&
-    motorcycleForm.hasError('sameBrandAndModel')
+    motorcycleForm.controls.title.touched &&
+    motorcycleForm.hasError('sameBrandAndTitle')
     ) {
-    <p>Brand and model must be different.</p>
+    <p>Brand and title must be different.</p>
   }
 
   <button type="submit" [disabled]="motorcycleForm.invalid">

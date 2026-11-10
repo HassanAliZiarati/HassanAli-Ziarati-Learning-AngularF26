@@ -2,20 +2,18 @@
 @for (motorcycle of motorcycleList(); track motorcycle.id) {
   <app-motorcycle-list-item
     [motorcycle]="motorcycle"
-
     [class.even] = "$even"
     [class.odd]="$odd"
     (motorcycleClicked)="onMotorcycleClicked($event)">
-
   </app-motorcycle-list-item>
 } @empty {
   <p>Nothing to show!!! GO BACK</p>
 }
-<h2> Sport Motorcycles</h2>
-<p>Sport motorcycle count: {{sportMotorcycleCount()}}</p>
+<h2> Filtered Motorcycles</h2>
+<p>Filtered motorcycle count: {{filteredMotorcycleCount()}}</p>
 
-@for (motorcycle of sportMotorcycle(); track motorcycle.id) {
-  <p>{{ motorcycle.brand }} {{ motorcycle.model }}</p>
+@for (motorcycle of filteredMotorcycles(); track motorcycle.id) {
+  <p>{{ motorcycle.title }} </p>
 } @empty {
-  <p>No sport motorcycle is available right now! Come back later!</p>
+  <p>No motorcycle is available right now! Come back later!</p>
 }

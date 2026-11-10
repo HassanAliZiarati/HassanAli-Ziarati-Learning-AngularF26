@@ -9,20 +9,18 @@ export class MockMotorcycleService {
     {
       id: 101,
       brand: 'Test Honda',
-      model: 'Fake CBR650R',
-      engineCC: 649,
-      hasABS: true,
-      category: 'sport',
-      image: 'images/CBR650.jpg',
+      title: 'Fake CBR650R',
+      price: 100,
+      category: 'motorcycle',
+      thumbnail: 'images/CBR650.jpg',
     },
     {
       id: 102,
       brand: 'Test Yamaha',
-      model: 'Fake MT-10',
-      engineCC: 998,
-      hasABS: true,
-      category: 'naked',
-      image: 'images/MT-10.jpg',
+      title: 'Fake MT-10',
+      price: 200,
+      category: 'motorcycle',
+      thumbnail: 'images/MT-10.jpg',
     },
   ]);
 
@@ -35,13 +33,13 @@ export class MockMotorcycleService {
     this.motorcycles.update((list) => [...list, newMotorcycle]);
   }
 
-  // Filter the list of Sport motorcycle
-  readonly sportMotorcycles = computed(() =>
+  // Filter motorcycle by category
+  readonly filteredMotorcycles = computed(() =>
     this.motorcycles().filter((motorcycle) => motorcycle.category === this.config.defaultCategory),
   );
 
   // Show the number of filtered list
-  readonly sportMotorcycleCount = computed(() => this.sportMotorcycles().length);
+  readonly filteredMotorcycleCount = computed(() => this.filteredMotorcycles().length);
 
   // count the motorcycle numbers
   constructor() {

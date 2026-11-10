@@ -1,9 +1,8 @@
 export interface Motorcycle {
   id: number;
+  title: string;
   brand: string;
-  model: string;
-  engineCC: number;
-  category: 'sport' | 'naked' | 'cruiser'; // Union type
-  hasABS?: boolean; // Optional
-  image: string;
+  price: number;
+  category: string;
+  thumbnail: string;
 }

@@ -1,33 +1,7 @@
 import { Component, inject, input, effect, computed } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
-import { Motorcycle} from '../shared/models/motorcycle';
 import { MotorcycleService } from '../services/motorcycle';
 import { Router } from '@angular/router';
-
-// Check for spaces only
-function noSpacesOnly(control: AbstractControl): ValidationErrors | null {
-  const value = control.value;
-
-  if (typeof value === 'string' && value.length > 0 && value.trim() === '') {
-    return { spacesOnly: true };
-  }
-
-  return null;
-}
-
-// Check that brand and model are different
-function differentBrandAndModel(
-  control: AbstractControl
-): ValidationErrors | null {
-  const brand = control.get('brand')?.value;
-  const model = control.get('model')?.value;
-
-  if (brand && model && brand === model) {
-    return { sameBrandAndModel: true };
-  }
-
-  return null;
-}
 
 @Component({
   imports: [ReactiveFormsModule],
@@ -35,7 +9,36 @@ function differentBrandAndModel(
   styleUrl: './motorcycle-form.css',
   templateUrl: './motorcycle-form.html',
 })
+
+
 export class MotorcycleForm {
+
+  // Check for spaces only
+  noSpacesOnly(control: AbstractControl): ValidationErrors | null {
+    const value = control.value;
+
+    if (typeof value === 'string' && value.length > 0 && value.trim() === '') {
+      return { spacesOnly: true };
+    }
+    return null;
+  }
+
+
+// Check that brand and title are different
+  differentBrandAndTitle(
+    control: AbstractControl
+  ): ValidationErrors | null {
+    const brand = control.get('brand')?.value;
+    const title = control.get('title')?.value;
+
+    if (brand && title && brand === title) {
+      return { sameBrandAndTitle: true };
+    }
+
+    return null;
+  }
+
+
   // Receive the motorcycle ID from the edit route
   id = input<string>();
 
@@ -73,14 +76,13 @@ export class MotorcycleForm {
 
   motorcycleForm = this.fb.nonNullable.group({
     // brand must not be empty and must have at least 2 characters
-    brand: ['', [Validators.required, Validators.minLength(2), noSpacesOnly]],
-    model: ['', [Validators.required]],
-    engineCC: [0],
-    category: ['sport' as Motorcycle['category']],
-    hasABS: [false],
-    image: [''],
+    brand: ['', [Validators.required, Validators.minLength(2), this.noSpacesOnly]],
+    title: ['', Validators.required],
+    price: [0],
+    category: ['motorcycle'],
+    thumbnail: [''],
   }, {
-    validators: differentBrandAndModel,
+    validators: this.differentBrandAndTitle,
     });
 
   constructor() {
@@ -96,10 +98,7 @@ export class MotorcycleForm {
       const motorcycle = this.motorcycleService.getMotorcycle(Number(id));
 
       if (motorcycle) {
-        this.motorcycleForm.patchValue({
-          ...motorcycle,
-          hasABS: motorcycle.hasABS ?? false,
-        });
+        this.motorcycleForm.patchValue(motorcycle);
       }
     });
   }

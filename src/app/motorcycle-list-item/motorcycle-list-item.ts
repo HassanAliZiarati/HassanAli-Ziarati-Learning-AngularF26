@@ -25,4 +25,6 @@ export class MotorcycleListItem {
       action: 'opened'
     });
   }
+
+  protected readonly alert = alert;
 }

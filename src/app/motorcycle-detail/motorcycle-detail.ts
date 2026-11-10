@@ -1,5 +1,6 @@
 import { Component,input, inject, computed } from '@angular/core';
 import { MotorcycleService } from '../services/motorcycle';
+import {it} from "vitest";
 
 @Component({
   imports: [],
@@ -17,4 +18,5 @@ export class MotorcycleDetail {
       motorcycle => motorcycle.id === Number(this.id())
     )
   );
+    protected readonly it = it;
 }
