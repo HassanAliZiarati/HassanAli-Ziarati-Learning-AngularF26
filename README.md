@@ -69,3 +69,9 @@ Example request: https://dummyjson.com/products/category/motorcycle
 
 The motorcycle list is inside the products array.
 Each motorcycle has a numeric id.
+
+### Loading data
+I used HttpClient to load motorcycles from API.
+I chose this because I can store the response in my existing signals and still I keep using my
+add, edit, and delete methods.
+I used the RxJS map to get the products array from the response.

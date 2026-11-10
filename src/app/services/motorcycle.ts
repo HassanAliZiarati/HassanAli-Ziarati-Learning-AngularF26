@@ -1,6 +1,8 @@
 import { Injectable, signal, computed, effect, inject } from '@angular/core';
 import {Motorcycle} from '../shared/models/motorcycle';
 import { MOTORCYCLE_CONFIG } from '../shared/config/motorcycle-config';
+import { HttpClient} from '@angular/common/http';
+import { map } from 'rxjs';
 
 
 @Injectable()
@@ -8,6 +10,11 @@ export class MotorcycleService {
   private motorcycles = signal<Motorcycle[]>([]);
 
   private config = inject(MOTORCYCLE_CONFIG);
+  private http = inject(HttpClient);
+  // loading status
+  readonly isLoading = signal(false);
+  // Error message
+  readonly error = signal<string | null>(null);
 
   readonly motorcycleList = this.motorcycles.asReadonly();
 
@@ -26,6 +33,8 @@ export class MotorcycleService {
 
   // count the motorcycle numbers
   constructor() {
+    this.loadMotorcycles();
+
     effect(() => {
       console.log('Motorcycle count:', this.motorcycles().length);
     });
@@ -51,5 +60,29 @@ export class MotorcycleService {
   // Create an ID above the highest current ID
   nextId(): number {
     return Math.max(0, ...this.motorcycles().map((motorcycle) => motorcycle.id)) + 1;
+  }
+
+  // Load motorcycles
+  loadMotorcycles(): void {
+    this.isLoading.set(true);
+    this.error.set(null);
+
+    this.http.get<{ products: Motorcycle[] }>(
+      `${this.config.apiBaseUrl}/products/category/motorcycle`,
+      {
+        params: {limit: 5}
+      }
+    ).pipe(
+      map(response => response.products)
+    ).subscribe({
+      next: motorcycles => {
+        this.motorcycles.set(motorcycles);
+        this.isLoading.set(false);
+      },
+      error: () => {
+        this.error.set("Could not load motorcycles");
+        this.isLoading.set(false)
+      }
+    });
   }
 }

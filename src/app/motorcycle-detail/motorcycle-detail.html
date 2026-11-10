@@ -3,7 +3,7 @@
 @if (motorcycle(); as item) {
   <h2>{{ item.title }}</h2>
 
-  <img src="item.thumbnail" alt="item.title">
+  <img [src]="item.thumbnail" [alt]="item.title">
 
   <p>ID: {{ item.id }}</p>
   <p>Brand: {{ item.brand }}</p>

@@ -1,4 +1,11 @@
 <h1>Motorcycle List</h1>
+@if (isLoading()) {
+  <p>Loading Motorcycles, WAIT...</p>
+}
+@if (error()) {
+  <p>{{error()}}</p>
+}
+
 @for (motorcycle of motorcycleList(); track motorcycle.id) {
   <app-motorcycle-list-item
     [motorcycle]="motorcycle"

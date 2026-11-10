@@ -15,6 +15,9 @@ export class MotorcycleList {
 
   motorcycleList = this.motorcycleService.motorcycleList;
 
+  isLoading = this.motorcycleService.isLoading;
+  error = this.motorcycleService.error;
+
   filteredMotorcycles = this.motorcycleService.filteredMotorcycles;
   filteredMotorcycleCount = this.motorcycleService.filteredMotorcycleCount;
 
