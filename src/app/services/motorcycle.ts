@@ -10,11 +10,15 @@ export class MotorcycleService {
   private motorcycles = signal<Motorcycle[]>([]);
 
   private config = inject(MOTORCYCLE_CONFIG);
+  // HttpClient request
   private http = inject(HttpClient);
   // loading status
   readonly isLoading = signal(false);
   // Error message
   readonly error = signal<string | null>(null);
+
+  //ID for adding motorcycle locally
+  private nextLocalID = -1;
 
   readonly motorcycleList = this.motorcycles.asReadonly();
 
@@ -25,7 +29,7 @@ export class MotorcycleService {
 
   // Filter motorcycle by category
   readonly filteredMotorcycles = computed(() =>
-    this.motorcycles().filter(motorcycle => motorcycle.category === this.config.defaultCategory),
+    this.motorcycles().filter((motorcycle) => motorcycle.category === this.config.defaultCategory),
   );
 
   // Show the number of filtered list
@@ -57,9 +61,11 @@ export class MotorcycleService {
     );
   }
 
-  // Create an ID above the highest current ID
+  // Create a local ID
   nextId(): number {
-    return Math.max(0, ...this.motorcycles().map((motorcycle) => motorcycle.id)) + 1;
+    const  id = this.nextLocalID;
+    this.nextLocalID = this.nextLocalID -1;
+    return id;
   }
 
   // Load motorcycles
@@ -67,22 +73,20 @@ export class MotorcycleService {
     this.isLoading.set(true);
     this.error.set(null);
 
-    this.http.get<{ products: Motorcycle[] }>(
-      `${this.config.apiBaseUrl}/products/category/motorcycle`,
-      {
-        params: {limit: 5}
-      }
-    ).pipe(
-      map(response => response.products)
-    ).subscribe({
-      next: motorcycles => {
-        this.motorcycles.set(motorcycles);
-        this.isLoading.set(false);
-      },
-      error: () => {
-        this.error.set("Could not load motorcycles");
-        this.isLoading.set(false)
-      }
-    });
+    this.http
+      .get<{ products: Motorcycle[] }>(`${this.config.apiBaseUrl}/products/category/motorcycle`, {
+        params: { limit: 5 },
+      })
+      .pipe(map((response) => response.products))
+      .subscribe({
+        next: (motorcycles) => {
+          this.motorcycles.set(motorcycles);
+          this.isLoading.set(false);
+        },
+        error: () => {
+          this.error.set('Could not load motorcycles');
+          this.isLoading.set(false);
+        },
+      });
   }
 }

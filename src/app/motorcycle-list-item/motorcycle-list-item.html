@@ -1,4 +1,4 @@
-<div class="motorcycle-item-style" (click)="openMotorcycle()">
+<div class="motorcycle-item-style">
 
   <h2>{{ motorcycle().title }}</h2>
 
@@ -23,5 +23,10 @@
           motorcycle().id]"
           (click)="$event.stopPropagation()">
     Edit
+  </button>
+
+  <!-- Delete button -->
+  <button type="button" (click)="openMotorcycle()">
+    Delete
   </button>
 </div>
