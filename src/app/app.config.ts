@@ -3,12 +3,16 @@ import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { routes } from './app.routes';
 import {MOTORCYCLE_CONFIG} from './shared/config/motorcycle-config';
 import {MotorcycleService} from './services/motorcycle';
-
+import {provideHttpClient, withInterceptors} from '@angular/common/http';
+import {loadingInterceptor} from './loading-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes, withComponentInputBinding()),
+
+    // Use the loading interceptor
+    provideHttpClient(withInterceptors([loadingInterceptor])),
 
     {
       provide: MOTORCYCLE_CONFIG,

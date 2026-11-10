@@ -10,6 +10,9 @@
     ? 'Editing locked — Unlock'
     : 'Editing unlocked — Lock' }}
   </button>
+  @if (loadingService.isLoading()) {
+    <span>Loading...</span>
+  }
 </nav>
 
 <router-outlet></router-outlet>

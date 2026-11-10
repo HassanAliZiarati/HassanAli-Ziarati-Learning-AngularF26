@@ -1,8 +1,7 @@
 import { Component, signal, inject } from '@angular/core';
-import { Motorcycle} from './shared/models/motorcycle';
-import  {MotorcycleList} from './motorcycle-list/motorcycle-list';
 import { Router, RouterOutlet, RouterLink } from '@angular/router';
 import { EditGuardService } from './services/edit-guard';
+import {LoadingService} from './services/loading';
 
 @Component({
   imports: [RouterOutlet, RouterLink],
@@ -14,6 +13,8 @@ import { EditGuardService } from './services/edit-guard';
 export class App {
   // Get the guard service
   protected editGuardService = inject(EditGuardService);
+  // Get the loading service
+  protected loadingService = inject(LoadingService);
 }
 
 
