@@ -5,6 +5,7 @@ import {MOTORCYCLE_CONFIG} from './shared/config/motorcycle-config';
 import {MotorcycleService} from './services/motorcycle';
 import {provideHttpClient, withInterceptors} from '@angular/common/http';
 import {loadingInterceptor} from './loading-interceptor';
+import {errorInterceptor} from './error-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -12,7 +13,12 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes, withComponentInputBinding()),
 
     // Use the loading interceptor
-    provideHttpClient(withInterceptors([loadingInterceptor])),
+    provideHttpClient(
+      withInterceptors([loadingInterceptor,
+        // Loading stops even if the request fails.
+        errorInterceptor,
+      ]),
+    ),
 
     {
       provide: MOTORCYCLE_CONFIG,

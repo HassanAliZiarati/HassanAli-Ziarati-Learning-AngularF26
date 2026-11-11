@@ -73,8 +73,10 @@ export class MotorcycleService {
     this.isLoading.set(true);
     this.error.set(null);
 
-    this.http
-      .get<{ products: Motorcycle[] }>(`${this.config.apiBaseUrl}/products/category/motorcycle`, {
+
+
+      // Correct path for testing: /products/category/motorcycle
+    this.http.get<{ products: Motorcycle[] }>(`${this.config.apiBaseUrl}/products/category/motorcycle`, {
         params: { limit: 5 },
       })
       .pipe(map((response) => response.products))

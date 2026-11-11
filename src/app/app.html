@@ -13,6 +13,16 @@
   @if (loadingService.isLoading()) {
     <span>Loading...</span>
   }
+
+  @if (errorService.errorMessage()) {
+    <div role="alert">
+      <p>{{ errorService.errorMessage() }}</p>
+
+      <button type="button" (click)="errorService.clearMessage()">
+        Dismiss
+      </button>
+    </div>
+  }
 </nav>
 
 <router-outlet></router-outlet>
