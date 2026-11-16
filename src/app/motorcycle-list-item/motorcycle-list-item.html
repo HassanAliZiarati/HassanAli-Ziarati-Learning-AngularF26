@@ -8,8 +8,8 @@
 
   <p>ID: {{ motorcycle().id }}</p>
   <p>Brand: {{ motorcycle().brand }}</p>
-  <p>Price: {{ motorcycle().price | currency: 'CAD'}}</p>
-  <p>Category: {{ motorcycle().category }}</p>
+  <p>{{ (motorcycle().price | currency:'CAD')| priceLabel:'Price' }}</p>
+  <p>Category: {{ motorcycle().category | categoryLabel}}</p>
 
   <a
     [routerLink]="['/motorcycles', motorcycle().id]"

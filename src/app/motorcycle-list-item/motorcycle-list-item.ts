@@ -3,9 +3,11 @@ import {Motorcycle} from '../shared/models/motorcycle';
 import { MotorcycleEvent } from '../shared/models/motorcycle-event';
 import { RouterLink } from '@angular/router';
 import { TitleCasePipe, CurrencyPipe } from '@angular/common';
+import { CategoryLabelPipe } from '../pipes/category-label-pipe';
+import { PriceLabelPipe} from '../pipes/price-label-pipe';
 
 @Component({
-  imports: [RouterLink, TitleCasePipe, CurrencyPipe],
+  imports: [RouterLink, TitleCasePipe, CurrencyPipe, CategoryLabelPipe, PriceLabelPipe],
   selector: 'app-motorcycle-list-item',
   styleUrl: './motorcycle-list-item.css',
   templateUrl: './motorcycle-list-item.html',
