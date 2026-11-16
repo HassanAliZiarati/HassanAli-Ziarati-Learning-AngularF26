@@ -5,25 +5,32 @@ import { MotorcycleForm} from './motorcycle-form/motorcycle-form';
 import { editGuard } from './edit-guard';
 
 export const routes: Routes = [
-  // Show motorcycle List
+  // Show the list
   {
     path: '',
     component: MotorcycleList,
   },
-  // Add a motorcycle, open the form
+  // Load the add form
   {
     path: 'motorcycles/add',
-    component: MotorcycleForm,
+    loadComponent: () => import('./motorcycle-form/motorcycle-form').then((m) => m.MotorcycleForm),
   },
-  // Check if editing is allowed
+  // Load the edit form
   {
     path: 'motorcycles/edit/:id',
-    component: MotorcycleForm,
+    loadComponent: () => import('./motorcycle-form/motorcycle-form').then((m) => m.MotorcycleForm),
     canActivate: [editGuard],
   },
-  // Display motorcycle by ID
+  // Load motorcycle details
   {
     path: 'motorcycles/:id',
-    component: MotorcycleDetail,
+    loadComponent: () =>
+      import('./motorcycle-detail/motorcycle-detail').then((m) => m.MotorcycleDetail),
   },
+  {
+    path: '**',
+    loadComponent: () =>
+      import('./not-found/not-found')
+        .then(m => m.NotFound),
+  }
 ];
