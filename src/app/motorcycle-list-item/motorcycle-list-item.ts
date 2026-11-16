@@ -2,9 +2,10 @@ import { Component, input, output } from '@angular/core';
 import {Motorcycle} from '../shared/models/motorcycle';
 import { MotorcycleEvent } from '../shared/models/motorcycle-event';
 import { RouterLink } from '@angular/router';
+import { TitleCasePipe, CurrencyPipe } from '@angular/common';
 
 @Component({
-  imports: [RouterLink],
+  imports: [RouterLink, TitleCasePipe, CurrencyPipe],
   selector: 'app-motorcycle-list-item',
   styleUrl: './motorcycle-list-item.css',
   templateUrl: './motorcycle-list-item.html',

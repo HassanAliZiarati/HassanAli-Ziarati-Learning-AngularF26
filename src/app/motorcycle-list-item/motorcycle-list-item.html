@@ -1,6 +1,6 @@
 <div class="motorcycle-item-style">
 
-  <h2>{{ motorcycle().title }}</h2>
+  <h2>{{ motorcycle().title | titlecase}}</h2>
 
   <img
     [src]="motorcycle().thumbnail"
@@ -8,7 +8,7 @@
 
   <p>ID: {{ motorcycle().id }}</p>
   <p>Brand: {{ motorcycle().brand }}</p>
-  <p>Price: {{ motorcycle().price }}</p>
+  <p>Price: {{ motorcycle().price | currency: 'CAD'}}</p>
   <p>Category: {{ motorcycle().category }}</p>
 
   <a

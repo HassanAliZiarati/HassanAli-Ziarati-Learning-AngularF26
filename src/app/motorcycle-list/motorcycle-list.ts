@@ -2,9 +2,10 @@ import { Component, inject } from '@angular/core';
 import { MotorcycleListItem } from '../motorcycle-list-item/motorcycle-list-item';
 import { MotorcycleEvent } from '../shared/models/motorcycle-event';
 import { MotorcycleService} from '../services/motorcycle';
+import { DecimalPipe} from '@angular/common';
 
 @Component({
-  imports: [MotorcycleListItem],
+  imports: [MotorcycleListItem, DecimalPipe],
   selector: 'app-motorcycle-list',
   styleUrl: './motorcycle-list.css',
   templateUrl: './motorcycle-list.html',

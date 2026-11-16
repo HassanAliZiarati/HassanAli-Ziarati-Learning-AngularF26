@@ -18,7 +18,7 @@
   <p>Nothing to show!!! GO BACK</p>
 }
 <h2> Filtered Motorcycles</h2>
-<p>Filtered motorcycle count: {{filteredMotorcycleCount()}}</p>
+<p>Filtered motorcycle count: {{filteredMotorcycleCount() | number: '1.0-0'}}</p>
 
 @for (motorcycle of filteredMotorcycles(); track motorcycle.id) {
   <p>{{ motorcycle.title }} </p>
