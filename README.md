@@ -107,3 +107,12 @@ chunk-VpIQBSSz.js   | not-found         | 374 bytes |               374 bytes
 
 The form, detail, and not-found pages now load when needed. I also removed an accidental Vitest import.
 The list page stays eager because it is the landing page.
+
+
+## Lifecycle
+### Reading the ID in the constructor
+I got an error because the ID was not ready in the constructor. I moved the code to ngOnInit(), and it could read the ID.
+
+### Leaving the detail page
+ngOnDestroy() ran when I clicked Motorcycle List or the browser's Back button. 
+The router removed the detail component, and my code showed how many seconds I stayed on the page.
