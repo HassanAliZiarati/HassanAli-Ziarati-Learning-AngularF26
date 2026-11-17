@@ -3,7 +3,7 @@
 <form [formGroup]="motorcycleForm" (ngSubmit)="onSubmit()">
   <label>
     Brand
-    <input type="text" formControlName="brand">
+    <input #firstField type="text" formControlName="brand">
   </label>
   @if (motorcycleForm.controls.brand.touched) {
     @if (motorcycleForm.controls.brand.hasError('required')) {

@@ -1,4 +1,4 @@
-import { Component, inject, input, effect, computed } from '@angular/core';
+import { Component, inject, input, effect, computed, viewChild, ElementRef, afterNextRender} from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { MotorcycleService } from '../services/motorcycle';
 import { Router } from '@angular/router';
@@ -9,10 +9,7 @@ import { Router } from '@angular/router';
   styleUrl: './motorcycle-form.css',
   templateUrl: './motorcycle-form.html',
 })
-
-
 export class MotorcycleForm {
-
   // Check for spaces only
   noSpacesOnly(control: AbstractControl): ValidationErrors | null {
     const value = control.value;
@@ -23,11 +20,8 @@ export class MotorcycleForm {
     return null;
   }
 
-
-// Check that brand and title are different
-  differentBrandAndTitle(
-    control: AbstractControl
-  ): ValidationErrors | null {
+  // Check that brand and title are different
+  differentBrandAndTitle(control: AbstractControl): ValidationErrors | null {
     const brand = control.get('brand')?.value;
     const title = control.get('title')?.value;
 
@@ -38,9 +32,11 @@ export class MotorcycleForm {
     return null;
   }
 
-
   // Receive the motorcycle ID from the edit route
   id = input<string>();
+
+  // Find the first input
+  private firstField = viewChild<ElementRef<HTMLInputElement>>('firstField');
 
   // Check whether the form is editing a motorcycle
   protected isEditMode = computed(() => this.id() !== undefined);
@@ -74,18 +70,28 @@ export class MotorcycleForm {
     this.router.navigate(['/motorcycles', id]);
   }
 
-  motorcycleForm = this.fb.nonNullable.group({
-    // brand must not be empty and must have at least 2 characters
-    brand: ['', [Validators.required, Validators.minLength(2), this.noSpacesOnly]],
-    title: ['', Validators.required],
-    price: [0],
-    category: ['motorcycle'],
-    thumbnail: [''],
-  }, {
-    validators: this.differentBrandAndTitle,
-    });
+  motorcycleForm = this.fb.nonNullable.group(
+    {
+      // brand must not be empty and must have at least 2 characters
+      brand: ['', [Validators.required, Validators.minLength(2), this.noSpacesOnly]],
+      title: ['', Validators.required],
+      price: [0],
+      category: ['motorcycle'],
+      thumbnail: [''],
+    },
+    {
+      validators: this.differentBrandAndTitle,
+    },
+  );
 
   constructor() {
+
+    // Wait for the input to render; it is not ready in ngOnInit.
+    afterNextRender(() => {
+      this.firstField()?.nativeElement.focus();
+    });
+
+
     // Fill the form when an edit ID is received
     effect(() => {
       const id = this.id();
